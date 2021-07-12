@@ -9,8 +9,10 @@ namespace Lap_TH456.ViewModels
 {
     public class CourseViewModel
     {
+       
         public IEnumerable<Course> UpcommingCourses { get; set; }
         public bool ShowAction { get; set; }
+      
         [Required]
         public string Place { get; set; }
         [Required]
