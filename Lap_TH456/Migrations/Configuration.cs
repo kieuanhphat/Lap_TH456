@@ -9,7 +9,8 @@ namespace Lap_TH456.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(Lap_TH456.Models.ApplicationDbContext context)

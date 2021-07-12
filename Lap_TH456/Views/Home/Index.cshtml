@@ -3,17 +3,8 @@
     ViewBag.Title = "Home Page";
 }
 <div class="row">
-    <ul>
-        @foreach (var course in Model)
-            {
-                <li>
-                    @course.DateTime - @course.Lecturer.Name
-                </li>
-            }
-    </ul>
-</div>
-<ul class="course">
-  
+    <ul class="course">
+
         @foreach (var course in Model)
         {
             <li>
@@ -31,11 +22,34 @@
                     </span>
                     <span class="category">
                         @course.Lecturer.Name
-                    </span >
+                    </span>
+                    <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going</button>
                 </div>
             </li>
         }
-</ul>
+    </ul>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $(".js-toggle-attendances").click(function (e) {
+                var button = $(e.target);
+                $.post("/api/attendances", { courseId: button.attr("data-course-id") })
+                    .done(function () {
+                        button
+                            .removeClass("btn-default")
+                            .addClass("btn-info")
+                            .text("Going");
+                    })
+                    .fail(function () {
+                        alert("Something failed!");
+                    });
+            });
+        });
+    </script>
+}
 
 <div class="jumbotron">
     <h1>ASP.NET</h1>
