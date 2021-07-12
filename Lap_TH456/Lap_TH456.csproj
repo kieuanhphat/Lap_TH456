@@ -185,6 +185,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DTOs\AttendanceDto.cs" />
+    <Compile Include="DTOs\FollowingDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -204,9 +205,13 @@
     <Compile Include="Migrations\202107101017198_AddNameColumToApplicationUser.Designer.cs">
       <DependentUpon>202107101017198_AddNameColumToApplicationUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202107120721442_AddAttendance.cs" />
-    <Compile Include="Migrations\202107120721442_AddAttendance.Designer.cs">
-      <DependentUpon>202107120721442_AddAttendance.cs</DependentUpon>
+    <Compile Include="Migrations\202107121050055_AddAttendance.cs" />
+    <Compile Include="Migrations\202107121050055_AddAttendance.Designer.cs">
+      <DependentUpon>202107121050055_AddAttendance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107121052361_AddFollowingsTable.cs" />
+    <Compile Include="Migrations\202107121052361_AddFollowingsTable.Designer.cs">
+      <DependentUpon>202107121052361_AddFollowingsTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -219,9 +224,9 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\CourseViewModel.cs" />
-    <Compile Include="ViewModels\FutureDate.cs" />
-    <Compile Include="ViewModels\ValidTime.cs" />
+    <Compile Include="Models\ViewModels\CourseViewModel.cs" />
+    <Compile Include="Models\ViewModels\FutureDate.cs" />
+    <Compile Include="Models\ViewModels\ValidTime.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -311,8 +316,11 @@
     <EmbeddedResource Include="Migrations\202107101017198_AddNameColumToApplicationUser.resx">
       <DependentUpon>202107101017198_AddNameColumToApplicationUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202107120721442_AddAttendance.resx">
-      <DependentUpon>202107120721442_AddAttendance.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202107121050055_AddAttendance.resx">
+      <DependentUpon>202107121050055_AddAttendance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107121052361_AddFollowingsTable.resx">
+      <DependentUpon>202107121052361_AddFollowingsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

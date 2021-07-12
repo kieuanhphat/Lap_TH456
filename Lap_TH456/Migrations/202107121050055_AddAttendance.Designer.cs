@@ -13,7 +13,7 @@ namespace Lap_TH456.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202107120721442_AddAttendance"; }
+            get { return "202107121050055_AddAttendance"; }
         }
         
         string IMigrationMetadata.Source

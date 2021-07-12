@@ -1,4 +1,5 @@
 ﻿using Lap_TH456.Models;
+using Lap_TH456.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -21,6 +22,11 @@ namespace Lap_TH456.Controllers
             .Include(c => c.Lecturer)
             .Include(c => c.Category)
             .Where(c => c.DateTime > DateTime.Now);
+            var viewModel = new CourseViewModel
+            {
+                UpcommingCourses = upcommingCourses,
+                ShowAction = User.Identity.IsAuthenticated
+            };
             return View(upcommingCourses);
         }
 

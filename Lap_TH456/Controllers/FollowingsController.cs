@@ -1,17 +1,39 @@
-﻿using System;
+﻿using Lap_TH456.DTOs;
+using Lap_TH456.Models;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
 
 namespace Lap_TH456.Controllers
 {
-    public class FollowingsController : Controller
+    public class FollowingsController : ApiController
     {
-        // GET: Followings
-        public ActionResult Index()
+        private readonly ApplicationDbContext _dbContext;
+        public FollowingsController()
         {
-            return View();
+            _dbContext = new ApplicationDbContext();
+        }
+        [HttpPost]
+        public IHttpActionResult Follow(FollowingDto followingDto)  
+        {
+            var userId = User.Identity.GetUserId();
+            if (_dbContext.Followings.Any(f => f.FollowerId == userId && f.FolloweeId == followingDto.FolloweeId))
+                return BadRequest("Following already exist! ");
+
+            var folowing = new Following
+            {
+                FollowerId = userId,
+                FolloweeId = followingDto.FolloweeId
+            };
+
+            _dbContext.Followings.Add(folowing);
+            _dbContext.SaveChanges();
+
+            return Ok();
         }
     }
 }

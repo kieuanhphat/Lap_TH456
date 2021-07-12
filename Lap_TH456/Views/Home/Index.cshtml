@@ -1,33 +1,41 @@
-﻿@model IEnumerable<Lap_TH456.Models.Course>
+﻿@model IEnumerable<Lap_TH456.ViewModels.CourseViewModel>
 @{
     ViewBag.Title = "Home Page";
 }
-<div class="row">
-    <ul class="course">
 
-        @foreach (var course in Model)
-        {
-            <li>
-                <div class="date">
-                    <div class="month">
-                        @course.DateTime.ToString("MM")
-                    </div>
-                    <div class="day">
-                        @course.DateTime.ToString("dd")
-                    </div>
+<ul class="course">
+
+    @foreach (var course in Model.UpcommingCourses)
+    {
+        <li>
+            <div class="date">
+                <div class="month">
+                    @course.DateTime.ToString("MM")
                 </div>
-                <div class="details">
-                    <span class="lecturer">
-                        @course.Lecturer.Name
-                    </span>
-                    <span class="category">
-                        @course.Category.Name
-                    </span>
-                    <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going</button>
+                <div class="day">
+                    @course.DateTime.ToString("dd")
                 </div>
-            </li>
-        }
-    </ul>
+            </div>
+            <div class="details">
+                <span class="lecturer">
+                    @course.Lecturer.Name
+                    @if (Model.ShowAction)
+                    {
+                        <button class="btn btn-default btn-sm js-toggle-follow" data-user-id="@course.LecturerId">Follow</button>
+                    }
+                </span>
+                <br />
+                <span class="category">
+                    @course.Category.Name
+                </span>
+                @if (Model.ShowAction)
+                {
+                    <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
+                }
+            </div>
+        </li>
+    }
+</ul>
 
 @section scripts{
 <script>
@@ -39,7 +47,6 @@
                     button
                         .removeClass("btn-danger")
                         .addClass("btn-success")
-
                         .text("Going");
                 })
 
@@ -52,10 +59,7 @@
             var button = $(e.target);
             $.post("/api/followings", { followerId: button.attr("data-user-id") })
                 .done(function () {
-                    button
-                        .removeClass("btn-danger")
-                        .addClass("btn-success")
-                        .text("Following");
+                    button.text("Following");
                 })
                 .fail(function () {
                     alert("Something failed!");
@@ -63,5 +67,4 @@
         });
     });
 </script>
-    }
-</div>
+}

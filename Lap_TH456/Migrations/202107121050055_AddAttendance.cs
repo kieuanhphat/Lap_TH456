@@ -24,15 +24,14 @@ namespace Lap_TH456.Migrations
                 "dbo.Followings",
                 c => new
                     {
-                        FollowerId = c.Int(nullable: false),
+                        FollowerId = c.String(nullable: false, maxLength: 128),
                         FolloweeId = c.String(nullable: false, maxLength: 128),
-                        Follower_Id = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.FollowerId, t.FolloweeId })
-                .ForeignKey("dbo.AspNetUsers", t => t.Follower_Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.FollowerId)
                 .ForeignKey("dbo.AspNetUsers", t => t.FolloweeId)
-                .Index(t => t.FolloweeId)
-                .Index(t => t.Follower_Id);
+                .Index(t => t.FollowerId)
+                .Index(t => t.FolloweeId);
             
         }
         
@@ -41,9 +40,9 @@ namespace Lap_TH456.Migrations
             DropForeignKey("dbo.Attendances", "CourseId", "dbo.Courses");
             DropForeignKey("dbo.Attendances", "AttendeeId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Followings", "FolloweeId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Followings", "Follower_Id", "dbo.AspNetUsers");
-            DropIndex("dbo.Followings", new[] { "Follower_Id" });
+            DropForeignKey("dbo.Followings", "FollowerId", "dbo.AspNetUsers");
             DropIndex("dbo.Followings", new[] { "FolloweeId" });
+            DropIndex("dbo.Followings", new[] { "FollowerId" });
             DropIndex("dbo.Attendances", new[] { "AttendeeId" });
             DropIndex("dbo.Attendances", new[] { "CourseId" });
             DropTable("dbo.Followings");

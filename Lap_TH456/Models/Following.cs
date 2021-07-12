@@ -11,7 +11,7 @@ namespace Lap_TH456.Models
     {
         [Key]
         [Column(Order = 1)]
-        public int FollowerId { get; set; }
+        public string FollowerId { get; set; }
         [Key]
         [Column(Order = 2)]
         public string FolloweeId { get; set; }
