@@ -22,12 +22,13 @@ namespace Lap_TH456.Controllers
             .Include(c => c.Lecturer)
             .Include(c => c.Category)
             .Where(c => c.DateTime > DateTime.Now);
-            var viewModel = new CourseViewModel
+
+            var viewModel = new CoursesViewModel
             {
                 UpcommingCourses = upcommingCourses,
                 ShowAction = User.Identity.IsAuthenticated
             };
-            return View(viewModel);
+            return View(viewModel); 
         }
 
         public ActionResult About()
