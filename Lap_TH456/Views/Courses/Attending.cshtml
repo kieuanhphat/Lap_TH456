@@ -1,4 +1,4 @@
-﻿@model Lap_TH456.ViewModels.CoursesViewModel
+﻿    @model Lap_TH456.ViewModels.CoursesViewModel
 
 @{
     ViewBag.Title = "Attending";
@@ -33,12 +33,44 @@
                 <span class="category">
                     @course.Category.Name
                 </span>
-                @if (Model.ShowAction)
-                {
-                    <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
-                }
+                    @if (Model.ShowAction)
+                    {
+                        <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
+                    }
+                
             </div>
 
         </li>
     }
 </ul>
+@section scripts{
+    <script>
+            $(document).ready(function () {
+                $(".js-toggle-attendance").click(function (e) {
+                    var button = $(e.target);
+                    $.post("/api/attendances", { courseId: button.attr("data-course-id") })
+                        .done(function () {
+                            button
+                                .removeClass("btn-danger")
+                                .addClass("btn-success")
+                                .text("Going");
+                        })
+
+                        .fail(function () {
+                            alert("Something failed!");
+                        });
+                });
+
+                $(".js-toggle-follow").click(function (e) {
+                    var button = $(e.target);
+                    $.post("/api/followings", { followerId: button.attr("data-user-id") })
+                        .done(function () {
+                            button.text("Following");
+                        })
+                        .fail(function () {
+                            alert("Something failed!");
+                        });
+                });
+            });
+    </script>
+}
